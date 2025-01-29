@@ -8,14 +8,19 @@ public class MicrophoneInput : MonoBehaviour
     public float frequency = 0.0f;
     public int audioSampleRate = 44100;
     public FFTWindow fftWindow;
+    public AudioVisualiser audioVisualiser;
+    public float intensityMultiplier = 1.0f;
+
 
     private int samples = 8192;
     private AudioSource audioSource;
 
+
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
-
+        audioVisualiser = GetComponent<AudioVisualiser>();
+        audioVisualiser.heightMult *= intensityMultiplier;
         UpdateMic();
     }
 

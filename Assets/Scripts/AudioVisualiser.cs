@@ -10,6 +10,7 @@ public class AudioVisualiser : MonoBehaviour
     public int sampleNumber = 1024;
     public FFTWindow fftWindow;
     public float lerpTime = 1.0f;
+    public float maxIntensity = 5.0f;
 
     private void Update()
     {
@@ -23,7 +24,7 @@ public class AudioVisualiser : MonoBehaviour
         for (int i = 0; i < audioSpectrumObjects.Length; i++)
         {
 
-            float intensity = spectrum[i] * heightMult;//getting the audio spectrum for object list pos
+            float intensity = Mathf.Clamp(spectrum[i] * heightMult, 0, maxIntensity);//getting the audio spectrum for object list pos
 
             float lerpY = Mathf.Lerp(audioSpectrumObjects[i].localScale.y, intensity, lerpTime);
             Vector3 newScale = new Vector3(audioSpectrumObjects[i].localScale.x, lerpY, audioSpectrumObjects[i].localScale.z);
